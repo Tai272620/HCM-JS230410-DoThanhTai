@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web xem phim</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <nav class="header-container">
+        <h1 onclick="renderListMovie(listMovieLocal)">PHIM VIETSUB</h1>
+        <ul class="nav-container">
+            <li onclick="render1()">ACTION</li>
+            <li onclick="render2()">ANIME</li>
+            <li onclick="render3()">DRAMA</li>
+        </ul>
+        <div class="filter-movie">
+            <select name="" id="">
+                <option value="all">All</option>
+                <option value="type">Thể loại</option>
+                <option value="date">Ngày chiếu</option>
+            </select>
+        </div>
+    </nav>
+    <div class="movie-container">
+
+    </div>
+    <script>
+
+        let listMovie = [
+            {
+                id: "ACTION1",
+                img: "./images/action1.webp",
+                name: "The Avenger 2020",
+                type: "action",
+                content: "Lorem ipsum dolor sit amet consectetur",
+                date: "2015-03-25",
+            },
+            {
+                id: "DRAMA4",
+                img: "./images/drama4.webp",
+                name: "Sát thủ",
+                type: "drama",
+                content: "Lorem ipsum dolor sit amet consectetur",
+                date: "2015-04-25",
+            },
+            {
+                id: "ANIME3",
+                img: "./images/anime3.jpeg",
+                name: "Đứa con của thời tiết",
+                type: "anime",
+                content: "Lorem ipsum dolor sit amet consectetur",
+                date: "2015-01-25",
+            },
+            {
+                id: "ACTION3",
+                img: "./images/action3.webp",
+                name: "The King's Man",
+                type: "action",
+                content: "Lorem ipsum dolor sit amet consectetur",
+                date: "2015-06-25",
+            },
+            {
+                id: "ACTION4",
+                img: "./images/action4.jpeg",
+                name: "Bullet Train",
+                type: "action",
+                content: "Lorem ipsum dolor sit amet consectetur",
+                date: "2015-07-25",
+            },
+            {
+                id: "ANIME1",
+                img: "./images/anime1.jpeg",
+                name: "khu vườn đom đóm",
+                type: "anime",
+                content: "Lorem ipsum dolor sit amet consectetur",
+                date: "2015-05-25",
+            },
+            {
+                id: "DRAMA2",
+                img: "./images/drama2.jpeg",
+                name: "Hạ cánh nơi anh",
+                type: "drama",
+                content: "Lorem ipsum dolor sit amet consectetur",
+                date: "2015-02-25",
+            },
+            {
+                id: "ANIME2",
+                img: "./images/anime2.jpeg",
+                name: "Your Name",
+                type: "anime",
+                content: "Lorem ipsum dolor sit amet consectetur",
+                date: "2015-11-25",
+            },
+            {
+                id: "DRAMA1",
+                img: "./images/drama1.jpeg",
+                name: "The Glory",
+                type: "drama",
+                content: "Lorem ipsum dolor sit amet consectetur",
+                date: "2015-12-25",
+            },
+            {
+                id: "ANIME4",
+                img: "./images/anime4.jpeg",
+                name: "Ngọn đồi của gió",
+                type: "anime",
+                content: "Lorem ipsum dolor sit amet consectetur",
+                date: "2015-11-25",
+            },
+
+            {
+                id: "DRAMA3",
+                img: "./images/drama3.webp",
+                name: "The man",
+                type: "drama",
+                content: "Lorem ipsum dolor sit amet consectetur",
+                date: "2015-05-25",
+            },
+
+            {
+                id: "ACTION2",
+                img: "./images/action2.jpeg",
+                name: "Fall out",
+                type: "action",
+                content: "Lorem ipsum dolor sit amet consectetur",
+                date: "2015-07-25",
+            },
+        ]
+
+        localStorage.setItem("listMovie", JSON.stringify(listMovie));
+        let listMovieLocal = JSON.parse(localStorage.getItem("listMovie"));
+
+        function renderListMovie(listMovie) {
+            let result = "";
+            for (let i = 0; i < listMovie.length; i++) {
+                result += `
+                <div class="movie">
+                    <img src="${listMovie[i].img}" alt="">
+                    <div class="movie-description">
+                        <h3>${listMovie[i].name}</h3>
+                        <h3>Thể loại: ${listMovie[i].type}</h3>
+                        <p>Nội dung: ${listMovie[i].content}</p>
+                        <p>Ngày chiếu: ${listMovie[i].date}</p>
+                    </div>
+                </div>
+                `
+            }
+            document.querySelector(".movie-container").innerHTML = result;
+        }
+        renderListMovie(listMovie);
+
+        function render1() {
+            let array1 = [];
+            for (let i = 0; i < listMovie.length; i++) {
+                if (listMovie[i].id.includes("ACTION")) {
+                    array1.push(listMovie[i])
+                }
+            }
+            console.log(array1)
+            renderListMovie(array1);
+        }
+
+        function render2() {
+            let array2 = [];
+            for (let i = 0; i < listMovie.length; i++) {
+                if (listMovie[i].id.includes("ANIME")) {
+                    array2.push(listMovie[i])
+                }
+            }
+            // console.log(array2)
+            renderListMovie(array2);
+        }
+
+        function render3() {
+            let array3 = [];
+            for (let i = 0; i < listMovie.length; i++) {
+                if (listMovie[i].id.includes("DRAMA")) {
+                    array3.push(listMovie[i])
+                }
+            }
+            console.log(array3)
+            renderListMovie(array3);
+        }
+
+        function renderTypeMovie() {
+            let array1 = [];
+            let array2 = [];
+            let array3 = []
+            let result = []
+            for (let i = 0; i < listMovie.length; i++) {
+                if (listMovie[i].id.includes("ACTION")) {
+                    array1.push(listMovie[i])
+                } else if (listMovie[i].id.includes("ANIME")) {
+                    array2.push(listMovie[i]);
+                } else if (listMovie[i].id.includes("DRAMA")) {
+                    array3.push(listMovie[i]);
+                }
+            }
+            result = result.concat(array1, array2, array3)
+            renderListMovie(result);
+        }
+
+        let filterMovie = document.querySelector(".filter-movie");
+
+        filterMovie.addEventListener("change", (e) => {
+            if (e.target.value === "all") {
+                renderListMovie(listMovieLocal);
+            } else if (e.target.value === "type") {
+                renderTypeMovie();
+                console.log("type")
+            } else if (e.target.value === "date") {
+                let x = listMovie.sort((a, b) => {
+                    return a.date.split("-").reverse().join("") - b.date.split("-").reverse().join("")
+                })
+                renderListMovie(x);
+            }
+        })
+    </script>
+</body>
+
+</html>
